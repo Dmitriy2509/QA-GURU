@@ -1,15 +1,11 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class StudentRegistrationTest {
 
@@ -26,17 +22,14 @@ public class StudentRegistrationTest {
     private By subjectsField = By.cssSelector("#subjectsInput");
     private By sportCheckbox= By.xpath("//label[@class = 'custom-control-label'] [contains(text(), 'Sports')]");
     private By readingCheckbox= By.xpath("//label[@class = 'custom-control-label'] [contains(text(), 'Reading')]");
-    private By uploadPictureBtn = By.xpath("//input[@type='file']");
-    private String filePath = "";
     private By currentAddressField = By.cssSelector("#currentAddress");
     private By selectStateDropdownMenu = By.cssSelector("#stateCity-wrapper #state .css-1wa3eu0-placeholder");
     private By optionNcr = By.xpath("//div[contains(@class, ' css-11unzgr')]//div[contains(text(), 'NCR')]");
     private By selectCityDropdownMenu = By.cssSelector("#city");
     private By optionDelhi = By.xpath("//div[contains(@class, 'css-11unzgr')]//div[contains(text(), 'Delhi')]");
     private By submitBtn = By.cssSelector("#submit");
-    private SelenideElement frameElement =  $(By.xpath("//iframe[not(@id) and not(@title)]"));
     private By nameOnTheForm = By.xpath("//tr/td[text()='Student Name']/following-sibling::td[contains(text(), 'Dmitriy Qwerty')]");
-    private By closeFormBtn = By.cssSelector("#closeLargeModal");
+
 
     private String firstName = "Dmitriy";
     private String lastName = "Qwerty";
@@ -66,13 +59,11 @@ public class StudentRegistrationTest {
         $(chooseYear).click();
         $(chooseYear).selectOption(year);
         $(date).click();
-
         $(subjectsField).click();
         $(subjectsField).sendKeys(subjects);
         $(subjectsField).pressEnter();
         $(sportCheckbox).click();
         $(readingCheckbox).click();
-//        $(uploadPictureBtn).sendKeys(filePath);
         $(currentAddressField).setValue(currentAddress);
         $(selectStateDropdownMenu).scrollIntoView(true);
         $(selectStateDropdownMenu).click();
@@ -81,6 +72,5 @@ public class StudentRegistrationTest {
         $(optionDelhi).click();
         $(submitBtn).click();
         $(nameOnTheForm).shouldBe(Condition.visible);
-//        $(closeFormBtn).click();
     }
 }
